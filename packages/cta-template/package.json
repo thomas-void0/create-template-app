@@ -3,7 +3,7 @@
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
-	"author":"thomas-void0",
+	"author": "thomas-void0",
 	"scripts": {
 		"start": "vite --mode development",
 		"build:test": "tsc && vite build --mode test",
@@ -61,7 +61,6 @@
 		"eslint-plugin-promise": "^6.1.1",
 		"eslint-plugin-react": "^7.31.11",
 		"husky": "^8.0.2",
-		"lerna": "^6.3.0",
 		"lint-staged": "^13.1.0",
 		"postcss": "^8.4.20",
 		"pre-commit": "^1.2.2",
@@ -76,8 +75,5 @@
 		"typescript": "^4.9.3",
 		"vite": "^4.0.0",
 		"vite-plugin-svgr": "^2.4.0"
-	},
-	"workspaces": [
-		"packages/*"
-	]
+	}
 }

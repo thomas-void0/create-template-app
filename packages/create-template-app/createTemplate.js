@@ -672,4 +672,3 @@ module.exports = {
   init,
 };
 
-init();

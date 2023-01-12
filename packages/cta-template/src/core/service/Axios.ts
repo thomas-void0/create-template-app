@@ -12,7 +12,7 @@ import type {
 } from './axiosType'
 import type { CreateAxiosOptions } from './axiosTransform'
 import qs from 'qs'
-import { AxiosCanceler } from './axiosCancel'
+import { AxiosCanceler } from '../service/axiosCancel'
 import { cloneDeep, isFunction } from 'lodash-es'
 
 // export * from '../typings/axiosTransform'
