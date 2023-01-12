@@ -35,16 +35,10 @@ function init() {
         `    Only ${chalk.green('<project-directory>')} is required.`
       );
       console.log();
-      console.log(
-        `      - a local path relative to the current working directory: ${chalk.green(
-          'file:../my-react-scripts'
-        )}`
-      );
-      console.log();
       console.log(`    A custom ${chalk.cyan('--template')} can be one of:`);
       console.log(
         `      - a custom template published on npm: ${chalk.green(
-          'cra-template-typescript'
+          'cta-template-admin'
         )}`
       );
       console.log(
@@ -65,11 +59,6 @@ function init() {
       console.log();
       console.log(
         `    If you have any problems, do not hesitate to file an issue:`
-      );
-      console.log(
-        `      ${chalk.cyan(
-          'https://github.com/facebook/create-react-app/issues/new'
-        )}`
       );
       console.log();
     })
