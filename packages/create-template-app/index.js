@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 'use strict';
 
 const currentNodeVersion = process.versions.node;
