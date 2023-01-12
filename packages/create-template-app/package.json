@@ -17,8 +17,7 @@
   },
   "files": [
     "index.js",
-    "createTemplate.js",
-    "copyTemplate.js"
+    "createTemplate.js"
   ],
   "dependencies": {
     "chalk": "^4.1.2",
