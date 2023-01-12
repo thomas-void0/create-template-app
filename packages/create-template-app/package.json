@@ -13,7 +13,7 @@
     "node": ">=14"
   },
   "bin": {
-    "create-template": "./index.js"
+    "create-template-app": "./index.js"
   },
   "files": [
     "index.js",
