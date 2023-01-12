@@ -453,35 +453,29 @@ function downloadTemplate(
     return;
   }
 
-  // let command = 'npm';
-  // let remove = 'uninstall';
-  // let args = [
-  //   'install',
-  //   '--no-audit', // https://github.com/facebook/create-react-app/issues/11174
-  //   '--save',
-  // ].filter(e => e);
+  let command = 'npm';
+  let remove = 'uninstall';
+  let args = [
+    'install',
+    '--no-audit', // https://github.com/facebook/create-react-app/issues/11174
+    '--save',
+  ].filter(e => e);
 
-  // // Remove template
-  // console.log(`Removing template package using ${command}...`);
-  // console.log();
+  // Remove template
+  console.log(`Removing template package using ${command}...`);
+  console.log();
 
-  // const proc = spawn.sync(command, [remove, templateName], {
-  //   stdio: 'inherit',
-  // });
-  // if (proc.status !== 0) {
-  //   console.error(`\`${command} ${args.join(' ')}\` failed`);
-  //   return;
-  // }
+  const proc = spawn.sync(command, [remove, templateName], {
+    stdio: 'inherit',
+  });
+  if (proc.status !== 0) {
+    console.error(`\`${command} ${args.join(' ')}\` failed`);
+    return;
+  }
 
 
   console.log();
   console.log(`Success! Created ${appName} at ${appPath}`);
-  console.log(
-    '    Removes this tool and copies build dependencies, configuration files'
-  );
-  console.log(
-    '    and scripts into the app directory. If you do this, you can’t go back!'
-  );
   console.log();
   console.log('Happy hacking!');
 };
@@ -574,7 +568,6 @@ function extractStream(stream, dest) {
 
 // Extract package name from tarball url or path.
 function getPackageInfo(installPackage) {
-  console.log("huhuhuhuL===", installPackage)
   if (installPackage.match(/^.+\.(tgz|tar\.gz)$/)) {
     return getTemporaryDirectory()
       .then(obj => {
