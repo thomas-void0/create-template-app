@@ -1,7 +1,7 @@
 {
   "name": "create-template-app",
   "author": "thomas-void0",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -22,7 +22,8 @@
   },
   "files": [
     "index.js",
-    "createTemplate.js"
+    "createTemplate.js",
+    "example.gif"
   ],
   "dependencies": {
     "chalk": "^4.1.2",

@@ -10,6 +10,18 @@
 npx create-template-app my-app
 ```
 
+**安装一个确定的模板**
+
+```shell
+npx create-template-app my-app --template mobile
+```
+
+**现有模板参数**
+
+|  参数  |          描述          |
+| :----: | :--------------------: |
+| mobile | 生成移动端开发项目模板 |
+
 # 参考
 
 [create-react-app](https://github.com/facebook/create-react-app)
