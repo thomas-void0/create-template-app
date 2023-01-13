@@ -308,11 +308,11 @@ function downloadTemplate({ appPath, useYarn, appName, templateName }) {
   const templateDir = path.join(templatePath, 'template');
   if (fs.existsSync(templateDir)) {
     // 删除pkg,pkg.lock or yarn.lock
-    fs.removeSync(`${templateDir}/package.json`)
-    fs.removeSync(`${templateDir}/package-lock.json`)
-    fs.removeSync(`${templateDir}/yarn.lock`)
+    fs.removeSync(`${appPath}/package.json`)
+    fs.removeSync(`${appPath}/package-lock.json`)
+    fs.removeSync(`${appPath}/yarn.lock`)
     fs.copySync(templateDir, appPath);
-    fs.removeSync(`${templateDir}/node_modules`)
+    fs.removeSync(`${appPath}/node_modules`)
   } else {
     console.error(
       `Could not locate supplied template: ${chalk.green(templateDir)}`
@@ -396,7 +396,6 @@ function getTemplateInstallPackage(template, originalDirectory) {
         // - NAME
         // - @SCOPE/NAME
         templateToInstall = `${scope}${templateToInstall}-${templateName}${version}`;
-        console.log("键入else:", templateToInstall);
       }
     }
   }
