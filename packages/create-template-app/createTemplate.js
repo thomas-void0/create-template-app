@@ -307,7 +307,12 @@ function downloadTemplate({ appPath, useYarn, appName, templateName }) {
   // Copy the files for the user
   const templateDir = path.join(templatePath, 'template');
   if (fs.existsSync(templateDir)) {
+    // 删除pkg,pkg.lock or yarn.lock
+    fs.removeSync(`${templateDir}/package.json`)
+    fs.removeSync(`${templateDir}/package-lock.json`)
+    fs.removeSync(`${templateDir}/yarn.lock`)
     fs.copySync(templateDir, appPath);
+    fs.removeSync(`${templateDir}/node_modules`)
   } else {
     console.error(
       `Could not locate supplied template: ${chalk.green(templateDir)}`
@@ -315,35 +320,35 @@ function downloadTemplate({ appPath, useYarn, appName, templateName }) {
     return;
   }
 
-  let command;
-  let remove;
-  let args;
+  // let command;
+  // let remove;
+  // let args;
 
-  if (useYarn) {
-    command = 'yarnpkg';
-    remove = 'remove';
-    args = ['add'];
-  } else {
-    command = 'npm';
-    remove = 'uninstall';
-    args = [
-      'install',
-      '--no-audit', // https://github.com/facebook/create-react-app/issues/11174
-      '--save',
-    ].filter(e => e);
-  }
+  // if (useYarn) {
+  //   command = 'yarnpkg';
+  //   remove = 'remove';
+  //   args = ['add'];
+  // } else {
+  //   command = 'npm';
+  //   remove = 'uninstall';
+  //   args = [
+  //     'install',
+  //     '--no-audit', // https://github.com/facebook/create-react-app/issues/11174
+  //     '--save',
+  //   ].filter(e => e);
+  // }
 
-  // Remove template
-  console.log(`Removing template package using ${command}...`);
-  console.log();
+  // // Remove template
+  // console.log(`Removing template package using ${command}...`);
+  // console.log();
 
-  const proc = spawn.sync(command, [remove, templateName], {
-    stdio: 'inherit',
-  });
-  if (proc.status !== 0) {
-    console.error(`\`${command} ${args.join(' ')}\` failed`);
-    return;
-  }
+  // const proc = spawn.sync(command, [remove, templateName], {
+  //   stdio: 'inherit',
+  // });
+  // if (proc.status !== 0) {
+  //   console.error(`\`${command} ${args.join(' ')}\` failed`);
+  //   return;
+  // }
 
   console.log();
   console.log(`Success! Created ${appName} at ${appPath}`);
