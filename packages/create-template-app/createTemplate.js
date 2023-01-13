@@ -190,6 +190,7 @@ function run({ root, appName, originalDirectory, template, useYarn }) {
         .then(({ templateInfo }) => {
           downloadTemplate({
             appPath: root,
+            useYarn,
             appName,
             templateName: templateInfo.name,
           });
@@ -288,7 +289,7 @@ function install({ root, useYarn, dependencies, isOnline }) {
   });
 }
 
-function downloadTemplate({ appPath, appName, templateName }) {
+function downloadTemplate({ appPath, useYarn, appName, templateName }) {
   if (!templateName) {
     console.log("");
     console.error(
@@ -311,6 +312,36 @@ function downloadTemplate({ appPath, appName, templateName }) {
     console.error(
       `Could not locate supplied template: ${chalk.green(templateDir)}`
     );
+    return;
+  }
+
+  let command;
+  let remove;
+  let args;
+
+  if (useYarn) {
+    command = 'yarnpkg';
+    remove = 'remove';
+    args = ['add'];
+  } else {
+    command = 'npm';
+    remove = 'uninstall';
+    args = [
+      'install',
+      '--no-audit', // https://github.com/facebook/create-react-app/issues/11174
+      '--save',
+    ].filter(e => e);
+  }
+
+  // Remove template
+  console.log(`Removing template package using ${command}...`);
+  console.log();
+
+  const proc = spawn.sync(command, [remove, templateName], {
+    stdio: 'inherit',
+  });
+  if (proc.status !== 0) {
+    console.error(`\`${command} ${args.join(' ')}\` failed`);
     return;
   }
 
