@@ -30,7 +30,6 @@ function init() {
     .action((name) => {
       projectName = name;
     })
-    .option("--verbose", "print additional logs")
     .option("--info", "print environment debug info")
     .option(
       "--template <tempalte-type>",
@@ -103,13 +102,12 @@ function init() {
 
   createApp({
     name: projectName,
-    verbose: options.verbose,
     template: options.template,
     useYarn: isUsingYarn(),
   });
 }
 
-function createApp({ name, verbose, template, useYarn }) {
+function createApp({ name, template, useYarn }) {
   const unsupportedNodeVersion = !semver.satisfies(
     // Coerce strings with metadata (i.e. `15.0.0-nightly`).
     semver.coerce(process.version),
@@ -163,7 +161,6 @@ function createApp({ name, verbose, template, useYarn }) {
   run({
     root,
     appName,
-    verbose,
     originalDirectory,
     template,
     useYarn,
@@ -180,7 +177,16 @@ function run({ root, appName, originalDirectory, template, useYarn }) {
             isOnline,
             templateInfo,
           }))
-        )
+        ).then(({ isOnline, templateInfo }) => {
+          return install({
+            root,
+            useYarn,
+            dependencies: [templateToInstall],
+            isOnline
+          }).then(() => ({
+            templateInfo,
+          }));
+        })
         .then(({ templateInfo }) => {
           downloadTemplate({
             appPath: root,
@@ -229,6 +235,57 @@ function run({ root, appName, originalDirectory, template, useYarn }) {
         });
     }
   );
+}
+
+function install({ root, useYarn, dependencies, isOnline }) {
+  return new Promise((resolve, reject) => {
+    let command;
+    let args;
+    if (useYarn) {
+      command = 'yarnpkg';
+      args = ['add', '--exact'];
+      if (!isOnline) {
+        args.push('--offline');
+      }
+      [].push.apply(args, dependencies);
+
+      // Explicitly set cwd() to work around issues like
+      // https://github.com/facebook/create-react-app/issues/3326.
+      // Unfortunately we can only do this for Yarn because npm support for
+      // equivalent --prefix flag doesn't help with this issue.
+      // This is why for npm, we run checkThatNpmCanReadCwd() early instead.
+      args.push('--cwd');
+      args.push(root);
+
+      if (!isOnline) {
+        console.log(chalk.yellow('You appear to be offline.'));
+        console.log(chalk.yellow('Falling back to the local Yarn cache.'));
+        console.log();
+      }
+    } else {
+      command = 'npm';
+      args = [
+        'install',
+        '--no-audit', // https://github.com/facebook/create-react-app/issues/11174
+        '--save',
+        '--save-exact',
+        '--loglevel',
+        'error',
+      ].concat(dependencies);
+
+    }
+
+    const child = spawn(command, args, { stdio: 'inherit' });
+    child.on('close', code => {
+      if (code !== 0) {
+        reject({
+          command: `${command} ${args.join(' ')}`,
+        });
+        return;
+      }
+      resolve();
+    });
+  });
 }
 
 function downloadTemplate({ appPath, appName, templateName }) {
