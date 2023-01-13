@@ -1,12 +1,17 @@
 {
   "name": "create-template-app",
   "author": "thomas-void0",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thomas-void0/create-template.git"
+  },
+  "homepage": "https://github.com/thomas-void0/create-template",
   "keywords": [],
   "license": "MIT",
   "engines": {
