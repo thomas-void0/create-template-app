@@ -1,6 +1,6 @@
 {
 	"name": "cta-template",
-	"version": "2.0.0",
+	"version": "2.0.1",
 	"type": "module",
 	"author": "thomas-void0",
 	"scripts": {
@@ -18,10 +18,5 @@
 		"**/*.{js,jsx,tsx,ts,css,md,json}": [
 			"prettier --write"
 		]
-	},
-	"dependencies": {
-	},
-	"devDependencies": {
-	
 	}
 }
