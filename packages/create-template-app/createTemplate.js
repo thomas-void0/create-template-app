@@ -352,16 +352,16 @@ function getTemplateInstallPackage(template, originalDirectory) {
         templateName.startsWith(`${templateToInstall}-`)
       ) {
         // Covers:
-        // - cra-template
-        // - @SCOPE/cra-template
-        // - cra-template-NAME
-        // - @SCOPE/cra-template-NAME
+        // - cta-template
+        // - @SCOPE/cta-template
+        // - cta-template-NAME
+        // - @SCOPE/cta-template-NAME
         templateToInstall = `${scope}${templateName}${version}`;
       } else if (version && !scope && !templateName) {
         // Covers using @SCOPE only
         templateToInstall = `${version}/${templateToInstall}`;
       } else {
-        // Covers templates without the `cra-template` prefix:
+        // Covers templates without the `cta-template` prefix:
         // - NAME
         // - @SCOPE/NAME
         templateToInstall = `${scope}${templateToInstall}-${templateName}${version}`;
