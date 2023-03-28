@@ -39,9 +39,13 @@
     "fs-extra": "^11.1.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.21.3",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.21.0",
     "@types/fs-extra": "^11.0.1",
     "@types/jest": "^29.5.0",
     "@types/tmp": "^0.2.3",
+    "babel-jest": "^29.5.0",
     "conventional-changelog-cli": "^2.2.2",
     "jest": "^29.5.0",
     "ts-jest": "^29.0.5",

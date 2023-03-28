@@ -1,4 +1,4 @@
-import aborting from "../src/lib/aborting";
+import aborting from "../lib/aborting";
 
 describe("aborting", () => {
   it("aborting test", () => {
