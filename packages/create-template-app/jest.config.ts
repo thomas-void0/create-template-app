@@ -8,9 +8,13 @@ const config: Config = {
   clearMocks: true,
   coverageDirectory: "coverage",
   testEnvironment: "node",
+  // transform: {
+  //   "node_modules/variables/.+\\.(j|t)sx?$": "ts-jest",
+  // },
   transform: {
-    "node_modules/variables/.+\\.(j|t)sx?$": "ts-jest",
+    "^.+\\.ts?$": "ts-jest",
   },
+  transformIgnorePatterns: ["<rootDir>/node_modules/"],
 };
 
 export default config;
