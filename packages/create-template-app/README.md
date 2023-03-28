@@ -2,8 +2,6 @@
 
 `create-template-app` 可用于快速生成开发项目模板
 
-![example](./example.gif)
-
 # 安装和使用
 
 ```shell
