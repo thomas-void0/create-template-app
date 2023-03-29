@@ -1,7 +1,7 @@
 {
   "name": "create-template-app",
   "author": "thomas-void0",
-  "version": "0.1.12-beta",
+  "version": "0.1.13",
   "description": "用于快速生成开发项目模板",
   "type": "module",
   "main": "./dist/index.js",
