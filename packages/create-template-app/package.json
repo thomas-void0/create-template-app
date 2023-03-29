@@ -10,6 +10,9 @@
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.com/"
+  },
   "tsup": {
     "entry": [
       "src/index.ts"
