@@ -28,10 +28,7 @@ function copyTemplate(arg: CopyTemplateParams): Promise<string> {
       );
       reject();
     }
-
-    const templatePath = path.dirname(
-      require.resolve(`${templateName}/package.json`, { paths: [appPath] })
-    );
+    const templatePath = path.join(appPath, "node_modules", templateName);
 
     // Copy the files for the user
     const templateDir = path.join(templatePath, "template");

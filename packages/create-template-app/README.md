@@ -11,14 +11,14 @@ npx create-template-app my-app
 **安装一个确定的模板**
 
 ```shell
-npx create-template-app my-app --template mobile
+npx create-template-app my-app --template admin
 ```
 
 **现有模板参数**
 
-|  参数  |          描述          |
-| :----: | :--------------------: |
-| mobile | 生成移动端开发项目模板 |
+| 参数  |         描述         |
+| :---: | :------------------: |
+| admin | 生成后台开发项目模板 |
 
 # 参考
 

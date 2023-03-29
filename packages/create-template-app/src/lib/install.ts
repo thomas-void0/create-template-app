@@ -1,24 +1,24 @@
-import { spawn } from "child_process";
+import spawn from "cross-spawn";
 
 function install(templateToInstall: string): Promise<string> {
   return new Promise((resolve, reject) => {
     const command = "npm";
     const args = [
       "install",
-      "--no-audit",
+      "--no-audit", // https://github.com/facebook/create-react-app/issues/11174
       "--save",
       "--save-exact",
       "--loglevel",
       "error",
     ].concat([templateToInstall]);
-
     const child = spawn(command, args, { stdio: "inherit" });
-
-    child.stderr?.on("data", function () {
-      reject(`${command} ${args.join(" ")} failed.`);
-    });
-
-    child.stdout?.on("data", function () {
+    child.on("close", (code) => {
+      if (code !== 0) {
+        reject({
+          command: `${command} ${args.join(" ")}`,
+        });
+        return;
+      }
       resolve(templateToInstall);
     });
   });

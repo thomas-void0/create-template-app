@@ -1,4 +1,4 @@
-import commander from "commander";
+import { Command } from "commander";
 import chalk from "chalk";
 
 export interface Options {
@@ -10,7 +10,7 @@ function getOptions(): Options {
   let options: Options = {
     projectName: "",
   };
-  const program = new commander.Command("create-template-app")
+  const program = new Command("create-template-app")
     .arguments("<project-directory>")
     .usage(`${chalk.green("<project-directory>")} [options]`)
     .action((name) => {
