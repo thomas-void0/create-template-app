@@ -11,6 +11,8 @@ function install(templateToInstall: string): Promise<string> {
       "--loglevel",
       "error",
     ].concat([templateToInstall]);
+
+    spawn.sync("npm", ["init", "-y"], { stdio: "inherit" });
     const child = spawn(command, args, { stdio: "inherit" });
     child.on("close", (code) => {
       if (code !== 0) {
